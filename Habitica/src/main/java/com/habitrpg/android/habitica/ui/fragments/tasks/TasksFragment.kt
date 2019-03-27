@@ -17,7 +17,6 @@ import com.habitrpg.android.habitica.helpers.RxErrorHandler
 import com.habitrpg.android.habitica.helpers.TaskFilterHelper
 import com.habitrpg.android.habitica.models.tasks.Task
 import com.habitrpg.android.habitica.ui.activities.OldTaskFormActivity
-import com.habitrpg.android.habitica.ui.activities.TaskFormActivity
 import com.habitrpg.android.habitica.ui.fragments.BaseMainFragment
 import com.habitrpg.android.habitica.ui.views.tasks.TaskFilterDialog
 import io.reactivex.functions.Consumer
@@ -286,11 +285,15 @@ class TasksFragment : BaseMainFragment() {
             return
         }
 
+        val allocationMode = user?.preferences?.hasTaskBasedAllocation() ?: false
+
         val bundle = Bundle()
         bundle.putString(OldTaskFormActivity.TASK_TYPE_KEY, type)
+        bundle.putString(OldTaskFormActivity.USER_ID_KEY, if (this.user != null) this.user?.id else null)
+        bundle.putBoolean(OldTaskFormActivity.ALLOCATION_MODE_KEY, allocationMode)
         bundle.putBoolean(OldTaskFormActivity.SAVE_TO_DB, true)
 
-        val intent = Intent(activity, TaskFormActivity::class.java)
+        val intent = Intent(activity, OldTaskFormActivity::class.java)
         intent.putExtras(bundle)
         intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
         if (this.isAdded) {
@@ -305,11 +308,16 @@ class TasksFragment : BaseMainFragment() {
             return
         }
 
+        val allocationMode = user?.preferences?.hasTaskBasedAllocation() ?: false
+
         val bundle = Bundle()
         bundle.putString(OldTaskFormActivity.TASK_TYPE_KEY, event.Task.type)
         bundle.putString(OldTaskFormActivity.TASK_ID_KEY, event.Task.id)
+        bundle.putString(OldTaskFormActivity.USER_ID_KEY, if (this.user != null) this.user?.id else null)
+        bundle.putBoolean(OldTaskFormActivity.ALLOCATION_MODE_KEY, allocationMode)
+        bundle.putBoolean(OldTaskFormActivity.SAVE_TO_DB, true)
 
-        val intent = Intent(activity, TaskFormActivity::class.java)
+        val intent = Intent(activity, OldTaskFormActivity::class.java)
         intent.putExtras(bundle)
         this.displayingTaskForm = true
         if (isAdded) {

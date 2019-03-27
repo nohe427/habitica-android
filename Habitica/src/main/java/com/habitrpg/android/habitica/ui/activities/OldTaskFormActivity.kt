@@ -964,8 +964,13 @@ class OldTaskFormActivity : BaseActivity() {
             val dayOfTheWeek = sharedPreferences.getString("FirstDayOfTheWeek",
                     Integer.toString(Calendar.getInstance().firstDayOfWeek))
             val firstDayOfTheWeekHelper = FirstDayOfTheWeekHelper.newInstance(Integer.parseInt(dayOfTheWeek ?: "0"))
-            datePickerDialog.datePicker.firstDayOfWeek = firstDayOfTheWeekHelper
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT_WATCH) {
+                @Suppress("DEPRECATION")
+                datePickerDialog.datePicker.calendarView.firstDayOfWeek = firstDayOfTheWeekHelper.firstDayOfTheWeek
+            } else {
+                datePickerDialog.datePicker.firstDayOfWeek = firstDayOfTheWeekHelper
                         .firstDayOfTheWeek
+            }
 
             this.datePickerDialog.setButton(DialogInterface.BUTTON_NEUTRAL, resources.getString(R.string.today)) { _, _ -> setCalendar(Calendar.getInstance().time) }
             updateDateText()
