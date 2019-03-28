@@ -52,10 +52,17 @@ class TaskDifficultyButtons @JvmOverloads constructor(
         val isActive = selectedDifficulty == difficulty.value
         var difficultyColor = ContextCompat.getColor(context, R.color.white)
         if (isActive) {
+<<<<<<< HEAD
             view.findViewById<ImageView>(R.id.image_view).background.mutate().setTint(tintColor)
             view.findViewById<TextView>(R.id.text_view).setTextColor(tintColor)
         } else {
             view.findViewById<ImageView>(R.id.image_view).background.mutate().setTint(ContextCompat.getColor(context, R.color.taskform_gray))
+=======
+            view.findViewById<ImageView>(R.id.image_view).background.setTint(tintColor)
+            view.findViewById<TextView>(R.id.text_view).setTextColor(tintColor)
+        } else {
+            view.findViewById<ImageView>(R.id.image_view).background.setTint(ContextCompat.getColor(context, R.color.taskform_gray))
+>>>>>>> Begin building new task form
             view.findViewById<TextView>(R.id.text_view).setTextColor(ContextCompat.getColor(context, R.color.gray_100))
             difficultyColor = ContextCompat.getColor(context, R.color.gray_400)
         }
