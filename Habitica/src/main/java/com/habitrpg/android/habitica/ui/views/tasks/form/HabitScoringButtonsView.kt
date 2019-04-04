@@ -64,9 +64,4 @@ class HabitScoringButtonsView @JvmOverloads constructor(
         isPositive = true
         isNegative = true
     }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> Begin building new task form
 }
