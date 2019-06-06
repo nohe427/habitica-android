@@ -138,7 +138,7 @@ abstract class HabiticaBaseApplication : MultiDexApplication() {
             sharedPrefs.edit {
                 putInt("last_installed_version", info.versionCode)
             }
-            inventoryRepository.retrieveContent().subscribe(Consumer { }, RxErrorHandler.handleEmptyError())
+            inventoryRepository.retrieveContent(applicationContext).subscribe(Consumer { }, RxErrorHandler.handleEmptyError())
         }
     }
 

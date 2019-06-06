@@ -642,7 +642,7 @@ open class MainActivity : BaseActivity(), TutorialView.OnTutorialReaction {
                         pushNotificationManager.setUser(user1)
                         pushNotificationManager.addPushDeviceUsingStoredToken()
                     }
-                    .flatMap { inventoryRepository.retrieveContent(false) }
+                    .flatMap { inventoryRepository.retrieveContent(this,false) }
                     .flatMap { inventoryRepository.retrieveWorldState() }
                     .subscribe(Consumer { }, RxErrorHandler.handleEmptyError())
         }
